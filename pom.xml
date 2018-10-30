@@ -44,6 +44,8 @@
     <junit.jupiter.version>5.3.1</junit.jupiter.version>
     <assertj.version>3.11.1</assertj.version>
     <jackson.version>2.9.4</jackson.version>
+    <scalatest.version>3.0.1</scalatest.version>
+    <macwire.version>2.3.1</macwire.version>
   </properties>
 
   <modules>
@@ -153,6 +155,7 @@
           <execution>
             <goals>
               <goal>compile</goal>
+              <goal>testCompile</goal>
             </goals>
           </execution>
         </executions>
