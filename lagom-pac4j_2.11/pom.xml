@@ -25,6 +25,12 @@
       <version>${lagom.version}</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.lightbend.lagom</groupId>
+      <artifactId>lagom-scaladsl-server_${scala.binary.version}</artifactId>
+      <version>${lagom.version}</version>
+      <scope>provided</scope>
+    </dependency>
     <!-- tests -->
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
@@ -34,8 +40,26 @@
     </dependency>
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
+      <artifactId>lagom-scaladsl-testkit_${scala.binary.version}</artifactId>
+      <version>${lagom.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-logback_${scala.binary.version}</artifactId>
       <version>${lagom.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest_${scala.binary.version}</artifactId>
+      <version>${scalatest.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.softwaremill.macwire</groupId>
+      <artifactId>macros_${scala.binary.version}</artifactId>
+      <version>${macwire.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -85,6 +109,20 @@
                 </resource>
               </resources>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest-maven-plugin</artifactId>
+        <version>2.0.0</version>
+        <executions>
+          <execution>
+            <id>test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
