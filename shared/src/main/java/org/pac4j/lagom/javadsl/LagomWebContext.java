@@ -78,7 +78,7 @@ public class LagomWebContext implements WebContext {
 
     @Override
     public void setResponseHeader(String name, String value) {
-        throw new TechnicalException("Operation not supported");
+        // do nothing
     }
 
     @Override

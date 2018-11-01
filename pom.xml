@@ -46,6 +46,7 @@
     <jackson.version>2.9.4</jackson.version>
     <scalatest.version>3.0.1</scalatest.version>
     <macwire.version>2.3.1</macwire.version>
+    <nimbus-jose-jwt.version>6.0</nimbus-jose-jwt.version>
   </properties>
 
   <modules>
@@ -58,6 +59,19 @@
       <groupId>org.pac4j</groupId>
       <artifactId>pac4j-core</artifactId>
       <version>${pac4j.version}</version>
+    </dependency>
+    <!-- provided -->
+    <dependency>
+      <groupId>org.pac4j</groupId>
+      <artifactId>pac4j-jwt</artifactId>
+      <version>${pac4j.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.nimbusds</groupId>
+      <artifactId>nimbus-jose-jwt</artifactId>
+      <version>${nimbus-jose-jwt.version}</version>
+      <scope>provided</scope>
     </dependency>
     <!-- tests -->
     <dependency>

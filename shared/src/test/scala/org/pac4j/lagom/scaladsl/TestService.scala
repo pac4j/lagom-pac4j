@@ -2,7 +2,6 @@ package org.pac4j.lagom.scaladsl
 
 import akka.NotUsed
 import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
-
 import com.lightbend.lagom.scaladsl.api.Service.{named, pathCall}
 
 /**
@@ -14,16 +13,14 @@ import com.lightbend.lagom.scaladsl.api.Service.{named, pathCall}
 trait TestService extends Service {
 
   def defaultAuthenticate: ServiceCall[NotUsed, String]
-
   def defaultAuthorize: ServiceCall[NotUsed, String]
-
   def defaultAuthorizeConfig: ServiceCall[NotUsed, String]
 
   def headerAuthenticate: ServiceCall[NotUsed, String]
-
   def headerAuthorize: ServiceCall[NotUsed, String]
-
   def headerAuthorizeConfig: ServiceCall[NotUsed, String]
+
+  def headerJwtAuthenticate: ServiceCall[NotUsed, String]
 
   override def descriptor: Descriptor = named("default").withCalls(
     pathCall("/default/authenticate", this.defaultAuthenticate),
@@ -31,7 +28,8 @@ trait TestService extends Service {
     pathCall("/default/authorize/config", this.defaultAuthorizeConfig),
     pathCall("/header/authenticate", this.headerAuthenticate),
     pathCall("/header/authorize", this.headerAuthorize),
-    pathCall("/header/authorize/config", this.headerAuthorizeConfig)
+    pathCall("/header/authorize/config", this.headerAuthorizeConfig),
+    pathCall("/header/jwt/authenticate", this.headerJwtAuthenticate)
   ).withAutoAcl(true)
 
 }

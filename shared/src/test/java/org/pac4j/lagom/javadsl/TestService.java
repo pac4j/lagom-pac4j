@@ -24,6 +24,8 @@ public interface TestService extends Service {
     ServiceCall<NotUsed, String> headerAuthorize();
     ServiceCall<NotUsed, String> headerAuthorizeConfig();
 
+    ServiceCall<NotUsed, String> headerJwtAuthenticate();
+
     @Override
     default Descriptor descriptor() {
         return named("default").withCalls(
@@ -32,7 +34,8 @@ public interface TestService extends Service {
                 pathCall("/default/authorize/config", this::defaultAuthorizeConfig),
                 pathCall("/header/authenticate", this::headerAuthenticate),
                 pathCall("/header/authorize", this::headerAuthorize),
-                pathCall("/header/authorize/config", this::headerAuthorizeConfig)
+                pathCall("/header/authorize/config", this::headerAuthorizeConfig),
+                pathCall("/header/jwt/authenticate", this::headerJwtAuthenticate)
         ).withAutoAcl(true);
     }
 }
