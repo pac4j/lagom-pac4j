@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import static org.pac4j.core.authorization.authorizer.IsAuthenticatedAuthorizer.isAuthenticated;
 import static org.pac4j.lagom.javadsl.ClientNames.HEADER_CLIENT;
+import static org.pac4j.lagom.javadsl.ClientNames.HEADER_JWT_CLIENT;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 
@@ -66,6 +67,13 @@ public class TestServiceImpl implements TestService, SecuredService {
     public ServiceCall<NotUsed, String> headerAuthorizeConfig() {
         String authorizerName = "_authenticated_";
         return authorize(HEADER_CLIENT, authorizerName, profile ->
+                request -> completedFuture(profile.getId())
+        );
+    }
+
+    @Override
+    public ServiceCall<NotUsed, String> headerJwtAuthenticate() {
+        return authenticate(HEADER_JWT_CLIENT, profile ->
                 request -> completedFuture(profile.getId())
         );
     }

@@ -39,7 +39,7 @@ class LagomWebContext(requestHeader: RequestHeader) extends WebContext {
 
   override def setResponseStatus(i: Int): Unit = throw new TechnicalException("Operation not supported")
 
-  override def setResponseHeader(s: String, s1: String): Unit = throw new TechnicalException("Operation not supported")
+  override def setResponseHeader(s: String, s1: String): Unit = {}
 
   override def setResponseContentType(s: String): Unit = throw new TechnicalException("Operation not supported")
 
