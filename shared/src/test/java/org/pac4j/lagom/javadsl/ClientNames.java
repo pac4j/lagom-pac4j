@@ -10,5 +10,6 @@ interface ClientNames {
 
     String HEADER_CLIENT = "simple_header";
     String HEADER_JWT_CLIENT = "jwt_header";
+    String COOKIE_CLIENT = "cookie_header";
 
 }

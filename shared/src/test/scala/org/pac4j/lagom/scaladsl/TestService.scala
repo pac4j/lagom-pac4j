@@ -16,6 +16,10 @@ trait TestService extends Service {
   def defaultAuthorize: ServiceCall[NotUsed, String]
   def defaultAuthorizeConfig: ServiceCall[NotUsed, String]
 
+  def cookieAuthenticate: ServiceCall[NotUsed, String]
+  def cookieAuthorize: ServiceCall[NotUsed, String]
+  def cookieAuthorizeConfig: ServiceCall[NotUsed, String]
+
   def headerAuthenticate: ServiceCall[NotUsed, String]
   def headerAuthorize: ServiceCall[NotUsed, String]
   def headerAuthorizeConfig: ServiceCall[NotUsed, String]
@@ -26,6 +30,9 @@ trait TestService extends Service {
     pathCall("/default/authenticate", this.defaultAuthenticate),
     pathCall("/default/authorize", this.defaultAuthorize),
     pathCall("/default/authorize/config", this.defaultAuthorizeConfig),
+    pathCall("/cookie/authenticate", this.cookieAuthenticate),
+    pathCall("/cookie/authorize", this.cookieAuthorize),
+    pathCall("/cookie/authorize/config", this.cookieAuthorizeConfig),
     pathCall("/header/authenticate", this.headerAuthenticate),
     pathCall("/header/authorize", this.headerAuthorize),
     pathCall("/header/authorize/config", this.headerAuthorizeConfig),

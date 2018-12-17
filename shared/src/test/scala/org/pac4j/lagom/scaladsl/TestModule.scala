@@ -9,9 +9,9 @@ import org.pac4j.core.context.WebContext
 import org.pac4j.core.credentials.authenticator.Authenticator
 import org.pac4j.core.credentials.{Credentials, TokenCredentials}
 import org.pac4j.core.profile.CommonProfile
-import org.pac4j.http.client.direct.HeaderClient
+import org.pac4j.http.client.direct.{CookieClient, HeaderClient}
 import org.pac4j.lagom.jwt.JwtAuthenticatorHelper
-import org.pac4j.lagom.scaladsl.ClientNames.{HEADER_CLIENT, HEADER_JWT_CLIENT}
+import org.pac4j.lagom.scaladsl.ClientNames.{COOKIE_CLIENT, HEADER_CLIENT, HEADER_JWT_CLIENT}
 
 /**
   * DI module for run tests.
@@ -20,6 +20,18 @@ import org.pac4j.lagom.scaladsl.ClientNames.{HEADER_CLIENT, HEADER_JWT_CLIENT}
   * @since 1.0.0
   */
 trait TestModule extends LagomConfigComponent {
+
+  lazy val cookieClient: CookieClient = {
+    val cookieClient = new CookieClient("auth", new Authenticator[Credentials]() {
+      override def validate(credentials: Credentials, webContext: WebContext): Unit = {
+        val profile = new CommonProfile()
+        profile.setId(credentials.asInstanceOf[TokenCredentials].getToken)
+        credentials.setUserProfile(profile)
+      }
+    })
+    cookieClient.setName(COOKIE_CLIENT)
+    cookieClient
+  }
 
   lazy val jwtClient: HeaderClient = {
     val headerClient = new HeaderClient
@@ -43,7 +55,7 @@ trait TestModule extends LagomConfigComponent {
   }
 
   lazy val serviceConfig: Config = {
-    val config = new Config(client, jwtClient)
+    val config = new Config(client, jwtClient, cookieClient)
     config.getClients.setDefaultSecurityClients(client.getName)
     config.addAuthorizer("_anonymous_", isAnonymous[CommonProfile])
     config.addAuthorizer("_authenticated_", isAuthenticated[CommonProfile])

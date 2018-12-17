@@ -6,10 +6,15 @@ import org.pac4j.core.context.WebContext;
 import org.pac4j.core.context.session.SessionStore;
 import org.pac4j.core.exception.TechnicalException;
 
+import java.net.HttpCookie;
 import java.util.Collection;
 import java.util.Map;
 
+import static play.mvc.Http.HeaderNames.COOKIE;
+
 import static java.lang.String.format;
+import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toList;
 
 /**
  * <p>Implementation web context of PAC4J for Lagom framework.</p>
@@ -113,7 +118,12 @@ public class LagomWebContext implements WebContext {
 
     @Override
     public Collection<Cookie> getRequestCookies() {
-        throw new TechnicalException("Operation not supported");
+        return requestHeader.getHeader(COOKIE)
+                .map(HttpCookie::parse)
+                .orElse(emptyList())
+                .stream()
+                .map(cookie -> new Cookie(cookie.getName(), cookie.getValue()))
+                .collect(toList());
     }
 
     @Override
