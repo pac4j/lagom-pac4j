@@ -67,7 +67,7 @@ class CookieClientTest {
     @DisplayName("authorize by Alice")
     void testAuthorizeProfile() throws ExecutionException, InterruptedException {
         String result = service.cookieAuthorize()
-                .handleRequestHeader(header -> header.withHeader(COOKIE, "auth=Alice; aaa=bbb"))
+                .handleRequestHeader(header -> header.withHeader(COOKIE, "aaa=bbb; auth=Alice"))
                 .invoke().toCompletableFuture().get();
         assertThat(result).isEqualTo("Alice");
     }
