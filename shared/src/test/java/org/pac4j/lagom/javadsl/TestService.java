@@ -20,6 +20,10 @@ public interface TestService extends Service {
     ServiceCall<NotUsed, String> defaultAuthorize();
     ServiceCall<NotUsed, String> defaultAuthorizeConfig();
 
+    ServiceCall<NotUsed, String> cookieAuthenticate();
+    ServiceCall<NotUsed, String> cookieAuthorize();
+    ServiceCall<NotUsed, String> cookieAuthorizeConfig();
+
     ServiceCall<NotUsed, String> headerAuthenticate();
     ServiceCall<NotUsed, String> headerAuthorize();
     ServiceCall<NotUsed, String> headerAuthorizeConfig();
@@ -32,6 +36,9 @@ public interface TestService extends Service {
                 pathCall("/default/authenticate", this::defaultAuthenticate),
                 pathCall("/default/authorize", this::defaultAuthorize),
                 pathCall("/default/authorize/config", this::defaultAuthorizeConfig),
+                pathCall("/cookie/authenticate", this::cookieAuthenticate),
+                pathCall("/cookie/authorize", this::cookieAuthorize),
+                pathCall("/cookie/authorize/config", this::cookieAuthorizeConfig),
                 pathCall("/header/authenticate", this::headerAuthenticate),
                 pathCall("/header/authorize", this::headerAuthorize),
                 pathCall("/header/authorize/config", this::headerAuthorizeConfig),

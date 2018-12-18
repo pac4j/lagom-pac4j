@@ -5,7 +5,7 @@ import com.lightbend.lagom.scaladsl.server.ServerServiceCall
 import org.pac4j.core.authorization.authorizer.IsAuthenticatedAuthorizer.isAuthenticated
 import org.pac4j.core.config.Config
 import org.pac4j.core.profile.CommonProfile
-import org.pac4j.lagom.scaladsl.ClientNames.{HEADER_CLIENT, HEADER_JWT_CLIENT}
+import org.pac4j.lagom.scaladsl.ClientNames.{HEADER_CLIENT, HEADER_JWT_CLIENT, COOKIE_CLIENT}
 
 import scala.concurrent.Future
 
@@ -28,6 +28,19 @@ class TestServiceImpl(override val securityConfig: Config) extends TestService w
   override def defaultAuthorizeConfig: ServiceCall[NotUsed, String] = {
     val authorizerName = "_authenticated_"
     authorize(authorizerName, (profile: CommonProfile) => ServerServiceCall { _: NotUsed => Future.successful(profile.getId) })
+  }
+
+  override def cookieAuthenticate: ServiceCall[NotUsed, String] = {
+    authenticate(COOKIE_CLIENT, (profile: CommonProfile) => ServerServiceCall { _: NotUsed => Future.successful(profile.getId) })
+  }
+
+  override def cookieAuthorize: ServiceCall[NotUsed, String] = {
+    authorize(COOKIE_CLIENT, isAuthenticated[CommonProfile](), (profile: CommonProfile) => ServerServiceCall { _: NotUsed => Future.successful(profile.getId) })
+  }
+
+  override def cookieAuthorizeConfig: ServiceCall[NotUsed, String] = {
+    val authorizerName = "_authenticated_"
+    authorize(COOKIE_CLIENT, authorizerName, (profile: CommonProfile) => ServerServiceCall { _: NotUsed => Future.successful(profile.getId) })
   }
 
   override def headerAuthenticate: ServiceCall[NotUsed, String] = {

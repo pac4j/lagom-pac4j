@@ -10,5 +10,6 @@ object ClientNames {
 
   val HEADER_CLIENT = "simple_header"
   val HEADER_JWT_CLIENT = "jwt_header"
+  val COOKIE_CLIENT = "cookie_header"
 
 }

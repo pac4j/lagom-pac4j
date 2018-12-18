@@ -1,11 +1,16 @@
 package org.pac4j.lagom.scaladsl
 
+import java.net.HttpCookie
 import java.util
+import java.util.Collections.emptyList
 
 import com.lightbend.lagom.scaladsl.api.transport.RequestHeader
 import org.pac4j.core.context.session.SessionStore
 import org.pac4j.core.context.{Cookie, WebContext}
 import org.pac4j.core.exception.TechnicalException
+import play.api.http.HeaderNames.COOKIE
+
+import scala.collection.JavaConversions._
 
 /**
   * <p>Implementation web context of PAC4J for Lagom framework.</p>
@@ -53,7 +58,10 @@ class LagomWebContext(requestHeader: RequestHeader) extends WebContext {
 
   override def getFullRequestURL: String = throw new TechnicalException("Operation not supported")
 
-  override def getRequestCookies: util.Collection[Cookie] = throw new TechnicalException("Operation not supported")
+  override def getRequestCookies: util.Collection[Cookie] = requestHeader.getHeader(COOKIE) match {
+    case Some(cookies) => for (cookie <- HttpCookie.parse(cookies)) yield new Cookie(cookie.getName, cookie.getValue)
+    case None => emptyList()
+  }
 
   override def addResponseCookie(cookie: Cookie): Unit = throw new TechnicalException("Operation not supported")
 
