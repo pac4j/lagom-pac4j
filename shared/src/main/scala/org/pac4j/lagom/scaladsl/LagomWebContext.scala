@@ -9,6 +9,7 @@ import org.pac4j.core.context.session.SessionStore
 import org.pac4j.core.context.{Cookie, WebContext}
 import org.pac4j.core.exception.TechnicalException
 import play.api.http.HeaderNames.COOKIE
+import play.core.netty.utils.ServerCookieDecoder
 
 import scala.collection.JavaConversions._
 
@@ -59,7 +60,7 @@ class LagomWebContext(requestHeader: RequestHeader) extends WebContext {
   override def getFullRequestURL: String = throw new TechnicalException("Operation not supported")
 
   override def getRequestCookies: util.Collection[Cookie] = requestHeader.getHeader(COOKIE) match {
-    case Some(cookies) => for (cookie <- HttpCookie.parse(cookies)) yield new Cookie(cookie.getName, cookie.getValue)
+    case Some(cookies) => for (cookie <- ServerCookieDecoder.STRICT.decode(cookies)) yield new Cookie(cookie.name(), cookie.value())
     case None => emptyList()
   }
 

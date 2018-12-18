@@ -5,15 +5,15 @@ import org.pac4j.core.context.Cookie;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.context.session.SessionStore;
 import org.pac4j.core.exception.TechnicalException;
+import play.core.netty.utils.ServerCookieDecoder;
 
-import java.net.HttpCookie;
 import java.util.Collection;
 import java.util.Map;
 
 import static play.mvc.Http.HeaderNames.COOKIE;
 
 import static java.lang.String.format;
-import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -119,10 +119,10 @@ public class LagomWebContext implements WebContext {
     @Override
     public Collection<Cookie> getRequestCookies() {
         return requestHeader.getHeader(COOKIE)
-                .map(HttpCookie::parse)
-                .orElse(emptyList())
+                .map(ServerCookieDecoder.STRICT::decode)
+                .orElse(emptySet())
                 .stream()
-                .map(cookie -> new Cookie(cookie.getName(), cookie.getValue()))
+                .map(cookie -> new Cookie(cookie.name(), cookie.value()))
                 .collect(toList());
     }
 

@@ -54,7 +54,7 @@ class CookieClientTest extends AsyncWordSpec with Matchers with BeforeAndAfterAl
     }
 
     "authorize by Alice" in {
-      service.cookieAuthorize.handleRequestHeader((header: RequestHeader) => header.withHeader(COOKIE, "auth=Alice; aaa=bbb")).invoke.map { result =>
+      service.cookieAuthorize.handleRequestHeader((header: RequestHeader) => header.withHeader(COOKIE, "aaa=bbb; auth=Alice;")).invoke.map { result =>
         result should ===("Alice")
       }
     }
