@@ -74,8 +74,8 @@ public final class JwtAuthenticatorHelper {
      *
      * @param conf Configuration of authenticator
      * @return JWT authenticator
-     * @throws ParseException
-     * @throws JOSEException
+     * @throws ParseException a parse exception
+     * @throws JOSEException a signing/encryption exception
      */
     public static JwtAuthenticator parse(Config conf) throws ParseException, JOSEException {
         List<SignatureConfiguration> signatures = new ArrayList<>();
