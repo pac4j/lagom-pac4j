@@ -1,6 +1,5 @@
 package org.pac4j.lagom.scaladsl
 
-import java.net.HttpCookie
 import java.util
 import java.util.Collections.emptyList
 
@@ -9,7 +8,7 @@ import org.pac4j.core.context.session.SessionStore
 import org.pac4j.core.context.{Cookie, WebContext}
 import org.pac4j.core.exception.TechnicalException
 import play.api.http.HeaderNames.COOKIE
-import play.core.netty.utils.ServerCookieDecoder
+import play.core.cookie.encoding.ServerCookieDecoder
 
 import scala.collection.JavaConversions._
 

@@ -5,7 +5,7 @@ import org.pac4j.core.context.Cookie;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.context.session.SessionStore;
 import org.pac4j.core.exception.TechnicalException;
-import play.core.netty.utils.ServerCookieDecoder;
+import play.core.cookie.encoding.ServerCookieDecoder;
 
 import java.util.Collection;
 import java.util.Map;
