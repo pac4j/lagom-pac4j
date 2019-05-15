@@ -38,8 +38,8 @@ If the user is not authenticated, the method can be processed with an anonymous 
 
 ## Demos
 
-Two demo services demonstrate authenticate/authorize by JWT are available in [Lagom Recipes](https://github.com/lagom/lagom-recipes): 
-([Scala demo](https://github.com/lagom/lagom-recipes/tree/master/auth-jwt/auth-jwt-scala-sbt), [Java demo](https://github.com/lagom/lagom-recipes/tree/master/auth-jwt/auth-jwt-java-sbt))
+Two demo services demonstrate authenticate/authorize by JWT: 
+([Scala/Sbt demo](https://github.com/pac4j/lagom-pac4j-scala-demo), [Java/Maven demo](https://github.com/pac4j/lagom-pac4j-java-demo))
 
 ## Versions
 
