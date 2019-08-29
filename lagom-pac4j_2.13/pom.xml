@@ -8,13 +8,13 @@
     <version>2.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>lagom-pac4j_2.11</artifactId>
+  <artifactId>lagom-pac4j_2.13</artifactId>
   <packaging>jar</packaging>
-  <name>pac4j implementation for Lagom framework (Scala 2.11)</name>
-  <description>Security library for Lagom framework based on pac4j using Scala 2.11</description>
+  <name>pac4j implementation for Lagom framework (Scala 2.13)</name>
+  <description>Security library for Lagom framework based on pac4j using Scala 2.13</description>
 
   <properties>
-    <scala.binary.version>2.11</scala.binary.version>
+    <scala.binary.version>2.13</scala.binary.version>
   </properties>
 
   <dependencies>
@@ -22,32 +22,32 @@
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-javadsl-server_${scala.binary.version}</artifactId>
-      <version>${lagom15.version}</version>
+      <version>${lagom16.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-scaladsl-server_${scala.binary.version}</artifactId>
-      <version>${lagom15.version}</version>
+      <version>${lagom16.version}</version>
       <scope>provided</scope>
     </dependency>
     <!-- tests -->
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-javadsl-testkit_${scala.binary.version}</artifactId>
-      <version>${lagom15.version}</version>
+      <version>${lagom16.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-scaladsl-testkit_${scala.binary.version}</artifactId>
-      <version>${lagom15.version}</version>
+      <version>${lagom16.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-logback_${scala.binary.version}</artifactId>
-      <version>${lagom15.version}</version>
+      <version>${lagom16.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

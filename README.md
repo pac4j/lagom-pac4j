@@ -3,15 +3,15 @@
 </p>
 
 The `lagom-pac4j` project is an **easy and powerful security library for Lagom framework** which supports authentication and authorization.
-It's based on Lagom 1.5 (and Scala 2.11 or Scala 2.12) and the **[pac4j security engine](https://github.com/pac4j/pac4j) v3**. 
+It's based on Lagom 1.5/1.6 (and Scala 2.11/2.12/2.13) and the **[pac4j security engine](https://github.com/pac4j/pac4j) v3**. 
 It's available under the Apache 2 license.
 
 Several versions of the library are available for the different versions of the Lagom framework:
 
-| Lagom version | pac4j version | lagom-pac4j version
-|---------------|---------------|--------------------
-| 1.4+          | 3.6           | 1.x.y (Java & Scala)
-| 1.5+          | 3.6           | 2.x.y (Java & Scala)
+| Lagom version     | pac4j version | lagom-pac4j version
+|-------------------|---------------|--------------------
+| 1.4+              | 3.6           | 1.x.y (Java & Scala)
+| 1.[5|6]+          | 3.7           | 2.x.y (Java & Scala)
 
 [**Main concepts and components:**](http://www.pac4j.org/docs/main-concepts-and-components.html)
 
