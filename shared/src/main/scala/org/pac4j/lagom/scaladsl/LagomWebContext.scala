@@ -10,11 +10,11 @@ import org.pac4j.core.exception.TechnicalException
 import play.api.http.HeaderNames.COOKIE
 import play.core.cookie.encoding.ServerCookieDecoder
 
-import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
 
 /**
   * <p>Implementation web context of PAC4J for Lagom framework.</p>
-  * <p>Context is immutable and the {@link SessionStore} is not supported.</p>
+  * <p>Context is immutable and the [[SessionStore]] is not supported.</p>
   *
   * @author Vladimir Kornyshev
   * @since 1.0.0
@@ -59,7 +59,9 @@ class LagomWebContext(requestHeader: RequestHeader) extends WebContext {
   override def getFullRequestURL: String = throw new TechnicalException("Operation not supported")
 
   override def getRequestCookies: util.Collection[Cookie] = requestHeader.getHeader(COOKIE) match {
-    case Some(cookies) => for (cookie <- ServerCookieDecoder.STRICT.decode(cookies)) yield new Cookie(cookie.name(), cookie.value())
+    case Some(cookies) => (
+      for (cookie <- ServerCookieDecoder.STRICT.decode(cookies).asScala) yield new Cookie(cookie.name(), cookie.value())
+    ).asJava
     case None => emptyList()
   }
 

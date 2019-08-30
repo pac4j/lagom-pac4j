@@ -22,32 +22,32 @@
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-javadsl-server_${scala.binary.version}</artifactId>
-      <version>${lagom.version}</version>
+      <version>${lagom15.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-scaladsl-server_${scala.binary.version}</artifactId>
-      <version>${lagom.version}</version>
+      <version>${lagom15.version}</version>
       <scope>provided</scope>
     </dependency>
     <!-- tests -->
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-javadsl-testkit_${scala.binary.version}</artifactId>
-      <version>${lagom.version}</version>
+      <version>${lagom15.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-scaladsl-testkit_${scala.binary.version}</artifactId>
-      <version>${lagom.version}</version>
+      <version>${lagom15.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-logback_${scala.binary.version}</artifactId>
-      <version>${lagom.version}</version>
+      <version>${lagom15.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
