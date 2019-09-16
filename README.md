@@ -11,7 +11,7 @@ Several versions of the library are available for the different versions of the 
 | Lagom version     | pac4j version | lagom-pac4j version
 |-------------------|---------------|--------------------
 | 1.4+              | 3.6           | 1.x.y (Java & Scala)
-| 1.[5|6]+          | 3.7           | 2.x.y (Java & Scala)
+| 1.[5\|6]+          | 3.7           | 2.x.y (Java & Scala)
 
 [**Main concepts and components:**](http://www.pac4j.org/docs/main-concepts-and-components.html)
 
