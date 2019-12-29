@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.pac4j</groupId>
     <artifactId>lagom-pac4j-parent</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.1.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>lagom-pac4j_2.13</artifactId>
@@ -16,6 +16,18 @@
   <properties>
     <scala.binary.version>2.13</scala.binary.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.lightbend.lagom</groupId>
+        <artifactId>lagom-maven-dependencies</artifactId>
+        <version>${lagom16.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <!-- provided -->
@@ -33,9 +45,13 @@
     </dependency>
     <!-- tests -->
     <dependency>
+      <groupId>com.typesafe.play</groupId>
+      <artifactId>play-akka-http-server_${scala.binary.version}</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-javadsl-testkit_${scala.binary.version}</artifactId>
-      <version>${lagom16.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -47,7 +63,6 @@
     <dependency>
       <groupId>com.lightbend.lagom</groupId>
       <artifactId>lagom-logback_${scala.binary.version}</artifactId>
-      <version>${lagom16.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
