@@ -1,6 +1,6 @@
 package org.pac4j.lagom.scaladsl.test
 
-import com.lightbend.lagom.scaladsl.api.transport.{Forbidden, RequestHeader}
+import com.lightbend.lagom.scaladsl.api.transport.RequestHeader
 import com.lightbend.lagom.scaladsl.server.{LagomApplication, LagomServer, LocalServiceLocator}
 import com.lightbend.lagom.scaladsl.testkit.ServiceTest
 import com.lightbend.lagom.scaladsl.testkit.ServiceTest.TestServer
