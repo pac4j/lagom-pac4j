@@ -8,11 +8,11 @@ import org.pac4j.core.client.Clients;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.profile.AnonymousProfile;
 import org.pac4j.core.profile.CommonProfile;
+import org.pac4j.lagom.javadsl.transport.Unauthorized;
 
 import java.util.function.Function;
 
 import static com.lightbend.lagom.javadsl.server.HeaderServiceCall.compose;
-
 import static java.util.Collections.singletonList;
 import static java.util.Optional.ofNullable;
 
@@ -117,7 +117,8 @@ public interface SecuredService {
                 authorized = false;
             }
             if (!authorized) {
-                throw new Forbidden("Authorization failed");
+                if (profile == null || profile instanceof AnonymousProfile) throw new Unauthorized("Unauthorized");
+                else throw new Forbidden("Authorization failed");
             }
             return serviceCall.apply(profile);
         }));

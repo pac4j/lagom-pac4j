@@ -3,9 +3,10 @@ import akka.NotUsed
 import com.lightbend.lagom.scaladsl.api.ServiceCall
 import com.lightbend.lagom.scaladsl.server.ServerServiceCall
 import org.pac4j.core.authorization.authorizer.IsAuthenticatedAuthorizer.isAuthenticated
+import org.pac4j.core.authorization.authorizer.RequireAnyRoleAuthorizer.requireAnyRole
 import org.pac4j.core.config.Config
 import org.pac4j.core.profile.CommonProfile
-import org.pac4j.lagom.scaladsl.ClientNames.{HEADER_CLIENT, HEADER_JWT_CLIENT, COOKIE_CLIENT}
+import org.pac4j.lagom.scaladsl.ClientNames.{COOKIE_CLIENT, HEADER_CLIENT, HEADER_JWT_CLIENT}
 
 import scala.concurrent.Future
 
@@ -23,6 +24,10 @@ class TestServiceImpl(override val securityConfig: Config) extends TestService w
 
   override def defaultAuthorize: ServiceCall[NotUsed, String] = {
     authorize(isAuthenticated[CommonProfile](), (profile: CommonProfile) => ServerServiceCall { _: NotUsed => Future.successful(profile.getId) })
+  }
+
+  override def defaultAuthorizeByRole: ServiceCall[NotUsed, String] = {
+    authorize(requireAnyRole[CommonProfile]("role"), (profile: CommonProfile) => ServerServiceCall { _: NotUsed => Future.successful(profile.getId) })
   }
 
   override def defaultAuthorizeConfig: ServiceCall[NotUsed, String] = {

@@ -9,6 +9,7 @@ import org.pac4j.core.client.Client
 import org.pac4j.core.config.Config
 import org.pac4j.core.credentials.Credentials
 import org.pac4j.core.profile.{AnonymousProfile, CommonProfile}
+import org.pac4j.lagom.scaladsl.transport.Unauthorized
 
 /**
   * <p>
@@ -104,6 +105,7 @@ trait SecuredService {
           // Otherwise exception will be sent to the client with stack trace.
           false
       }
+      if (profile == null || profile.isInstanceOf[AnonymousProfile]) throw Unauthorized("Unauthorized")
       if (!authorized) throw Forbidden("Authorization failed")
       serviceCall.apply(profile)
     })

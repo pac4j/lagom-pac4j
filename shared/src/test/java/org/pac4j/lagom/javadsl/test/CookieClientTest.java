@@ -1,12 +1,12 @@
 package org.pac4j.lagom.javadsl.test;
 
-import com.lightbend.lagom.javadsl.api.transport.Forbidden;
 import com.lightbend.lagom.javadsl.testkit.ServiceTest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.pac4j.lagom.javadsl.TestService;
+import org.pac4j.lagom.javadsl.transport.Unauthorized;
 
 import java.util.concurrent.ExecutionException;
 
@@ -59,8 +59,8 @@ class CookieClientTest {
     @DisplayName("authorize by anonymous")
     void testAuthorizeAnonymous() {
         Throwable thrown = catchThrowable(() -> service.headerAuthorize().invoke().toCompletableFuture().get());
-        assertThat(thrown).hasCauseExactlyInstanceOf(Forbidden.class);
-        assertThat(thrown.getCause()).hasMessage("Authorization failed");
+        assertThat(thrown).hasCauseExactlyInstanceOf(Unauthorized.class);
+        assertThat(thrown.getCause()).hasMessage("Unauthorized");
     }
 
     @Test
@@ -76,8 +76,8 @@ class CookieClientTest {
     @DisplayName("authorize by anonymous (authorizer from config)")
     void testAuthorizeConfigAnonymous() {
         Throwable thrown = catchThrowable(() -> service.cookieAuthorizeConfig().invoke().toCompletableFuture().get());
-        assertThat(thrown).hasCauseExactlyInstanceOf(Forbidden.class);
-        assertThat(thrown.getCause()).hasMessage("Authorization failed");
+        assertThat(thrown).hasCauseExactlyInstanceOf(Unauthorized.class);
+        assertThat(thrown.getCause()).hasMessage("Unauthorized");
     }
 
     @Test

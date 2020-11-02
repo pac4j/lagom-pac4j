@@ -14,6 +14,7 @@ trait TestService extends Service {
 
   def defaultAuthenticate: ServiceCall[NotUsed, String]
   def defaultAuthorize: ServiceCall[NotUsed, String]
+  def defaultAuthorizeByRole: ServiceCall[NotUsed, String]
   def defaultAuthorizeConfig: ServiceCall[NotUsed, String]
 
   def cookieAuthenticate: ServiceCall[NotUsed, String]
@@ -29,6 +30,7 @@ trait TestService extends Service {
   override def descriptor: Descriptor = named("default").withCalls(
     pathCall("/default/authenticate", this.defaultAuthenticate),
     pathCall("/default/authorize", this.defaultAuthorize),
+    pathCall("/default/authorize/role", this.defaultAuthorizeByRole),
     pathCall("/default/authorize/config", this.defaultAuthorizeConfig),
     pathCall("/cookie/authenticate", this.cookieAuthenticate),
     pathCall("/cookie/authorize", this.cookieAuthorize),
@@ -37,6 +39,8 @@ trait TestService extends Service {
     pathCall("/header/authorize", this.headerAuthorize),
     pathCall("/header/authorize/config", this.headerAuthorizeConfig),
     pathCall("/header/jwt/authenticate", this.headerJwtAuthenticate)
-  ).withAutoAcl(true)
+  )
+    .withAutoAcl(true)
+    .withExceptionSerializer(Pac4jExceptionSerializer())
 
 }
