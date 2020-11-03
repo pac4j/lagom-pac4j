@@ -5,6 +5,7 @@ import com.lightbend.lagom.scaladsl.server.{LagomApplication, LagomServer, Local
 import com.lightbend.lagom.scaladsl.testkit.ServiceTest
 import com.lightbend.lagom.scaladsl.testkit.ServiceTest.TestServer
 import com.softwaremill.macwire.wire
+import org.pac4j.lagom.scaladsl.transport.Unauthorized
 import org.pac4j.lagom.scaladsl.{TestModule, TestService, TestServiceImpl}
 import org.scalatest.{AsyncWordSpec, BeforeAndAfterAll, Matchers}
 import play.api.http.HeaderNames.COOKIE
@@ -48,8 +49,8 @@ class CookieClientTest extends AsyncWordSpec with Matchers with BeforeAndAfterAl
       service.cookieAuthorize.invoke.map { result =>
         fail("authorize by anonymous should be forbidden")
       } recoverWith {
-        case f: Forbidden =>
-          f.getMessage should ===("Authorization failed")
+        case f: Unauthorized =>
+          f.getMessage should ===("Unauthorized")
       }
     }
 
@@ -63,8 +64,8 @@ class CookieClientTest extends AsyncWordSpec with Matchers with BeforeAndAfterAl
       service.cookieAuthorizeConfig.invoke.map { result =>
         fail("authorize by anonymous should be forbidden")
       } recoverWith {
-        case f: Forbidden =>
-          f.getMessage should ===("Authorization failed")
+        case f: Unauthorized =>
+          f.getMessage should ===("Unauthorized")
       }
     }
 

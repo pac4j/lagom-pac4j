@@ -9,6 +9,7 @@ import org.scalatest.{AsyncWordSpec, BeforeAndAfterAll, Matchers}
 import play.api.libs.ws.ahc.AhcWSComponents
 import com.lightbend.lagom.scaladsl.testkit.ServiceTest.TestServer
 import com.softwaremill.macwire.wire
+import org.pac4j.lagom.scaladsl.transport.Unauthorized
 
 /**
   * Test of security logic for default client ({@link org.pac4j.http.client.direct.HeaderClient}).
@@ -45,8 +46,17 @@ class DefaultClientTest extends AsyncWordSpec with Matchers with BeforeAndAfterA
     }
 
     "not authorize by anonymous" in {
-      service.defaultAuthorize.invoke.map { result =>
+      service.defaultAuthorize.invoke.map { _ =>
         fail("authorize by anonymous should be forbidden")
+      } recoverWith {
+        case f: Unauthorized =>
+          f.getMessage should ===("Unauthorized")
+      }
+    }
+
+    "not authorize by Alice without role" in {
+      service.defaultAuthorizeByRole.handleRequestHeader((header: RequestHeader) => header.withHeader(AUTHORIZATION_HEADER, "Alice")).invoke.map { _ =>
+        fail("authorize by Alice without role should be forbidden")
       } recoverWith {
         case f: Forbidden =>
           f.getMessage should ===("Authorization failed")
@@ -60,11 +70,11 @@ class DefaultClientTest extends AsyncWordSpec with Matchers with BeforeAndAfterA
     }
 
     "not authorize by anonymous (authorizer from config)" in {
-      service.defaultAuthorizeConfig.invoke.map { result =>
+      service.defaultAuthorizeConfig.invoke.map { _ =>
         fail("authorize by anonymous should be forbidden")
       } recoverWith {
-        case f: Forbidden =>
-          f.getMessage should ===("Authorization failed")
+        case f: Unauthorized =>
+          f.getMessage should ===("Unauthorized")
       }
     }
 

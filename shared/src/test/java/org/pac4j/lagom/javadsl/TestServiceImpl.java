@@ -7,6 +7,7 @@ import org.pac4j.core.config.Config;
 import javax.inject.Inject;
 
 import static org.pac4j.core.authorization.authorizer.IsAuthenticatedAuthorizer.isAuthenticated;
+import static org.pac4j.core.authorization.authorizer.RequireAnyRoleAuthorizer.requireAnyRole;
 import static org.pac4j.lagom.javadsl.ClientNames.COOKIE_CLIENT;
 import static org.pac4j.lagom.javadsl.ClientNames.HEADER_CLIENT;
 import static org.pac4j.lagom.javadsl.ClientNames.HEADER_JWT_CLIENT;
@@ -39,6 +40,13 @@ public class TestServiceImpl implements TestService, SecuredService {
     public ServiceCall<NotUsed, String> defaultAuthorize() {
         return authorize(isAuthenticated(), profile ->
                 request -> completedFuture(profile.getId())
+        );
+    }
+
+    @Override
+    public ServiceCall<NotUsed, String> defaultAuthorizeByRole() {
+        return authorize(requireAnyRole("role"), profile ->
+            request -> completedFuture(profile.getId())
         );
     }
 

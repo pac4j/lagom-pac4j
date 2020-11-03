@@ -17,15 +17,23 @@ import static com.lightbend.lagom.javadsl.api.Service.pathCall;
 public interface TestService extends Service {
 
     ServiceCall<NotUsed, String> defaultAuthenticate();
+
     ServiceCall<NotUsed, String> defaultAuthorize();
+
+    ServiceCall<NotUsed, String> defaultAuthorizeByRole();
+
     ServiceCall<NotUsed, String> defaultAuthorizeConfig();
 
     ServiceCall<NotUsed, String> cookieAuthenticate();
+
     ServiceCall<NotUsed, String> cookieAuthorize();
+
     ServiceCall<NotUsed, String> cookieAuthorizeConfig();
 
     ServiceCall<NotUsed, String> headerAuthenticate();
+
     ServiceCall<NotUsed, String> headerAuthorize();
+
     ServiceCall<NotUsed, String> headerAuthorizeConfig();
 
     ServiceCall<NotUsed, String> headerJwtAuthenticate();
@@ -33,16 +41,19 @@ public interface TestService extends Service {
     @Override
     default Descriptor descriptor() {
         return named("default").withCalls(
-                pathCall("/default/authenticate", this::defaultAuthenticate),
-                pathCall("/default/authorize", this::defaultAuthorize),
-                pathCall("/default/authorize/config", this::defaultAuthorizeConfig),
-                pathCall("/cookie/authenticate", this::cookieAuthenticate),
-                pathCall("/cookie/authorize", this::cookieAuthorize),
-                pathCall("/cookie/authorize/config", this::cookieAuthorizeConfig),
-                pathCall("/header/authenticate", this::headerAuthenticate),
-                pathCall("/header/authorize", this::headerAuthorize),
-                pathCall("/header/authorize/config", this::headerAuthorizeConfig),
-                pathCall("/header/jwt/authenticate", this::headerJwtAuthenticate)
-        ).withAutoAcl(true);
+            pathCall("/default/authenticate", this::defaultAuthenticate),
+            pathCall("/default/authorize", this::defaultAuthorize),
+            pathCall("/default/authorize/role", this::defaultAuthorizeByRole),
+            pathCall("/default/authorize/config", this::defaultAuthorizeConfig),
+            pathCall("/cookie/authenticate", this::cookieAuthenticate),
+            pathCall("/cookie/authorize", this::cookieAuthorize),
+            pathCall("/cookie/authorize/config", this::cookieAuthorizeConfig),
+            pathCall("/header/authenticate", this::headerAuthenticate),
+            pathCall("/header/authorize", this::headerAuthorize),
+            pathCall("/header/authorize/config", this::headerAuthorizeConfig),
+            pathCall("/header/jwt/authenticate", this::headerJwtAuthenticate)
+        )
+            .withExceptionSerializer(new Pac4jExceptionSerializer())
+            .withAutoAcl(true);
     }
 }

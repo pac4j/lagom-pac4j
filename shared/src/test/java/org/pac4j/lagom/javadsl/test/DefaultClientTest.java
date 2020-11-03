@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.pac4j.lagom.javadsl.TestService;
+import org.pac4j.lagom.javadsl.transport.Unauthorized;
 
 import java.util.concurrent.ExecutionException;
 
@@ -59,6 +60,18 @@ class DefaultClientTest {
     @DisplayName("authorize by anonymous")
     void testAuthorizeAnonymous() {
         Throwable thrown = catchThrowable(() -> service.defaultAuthorize().invoke().toCompletableFuture().get());
+        assertThat(thrown).hasCauseExactlyInstanceOf(Unauthorized.class);
+        assertThat(thrown.getCause()).hasMessage("Unauthorized");
+    }
+
+    @Test
+    @DisplayName("authorize by role")
+    void testAuthorizeByRole() {
+        Throwable thrown = catchThrowable(
+            () -> service.defaultAuthorizeByRole()
+                .handleRequestHeader(header -> header.withHeader(AUTHORIZATION_HEADER, "Alice"))
+                .invoke().toCompletableFuture().get()
+        );
         assertThat(thrown).hasCauseExactlyInstanceOf(Forbidden.class);
         assertThat(thrown.getCause()).hasMessage("Authorization failed");
     }
@@ -76,8 +89,8 @@ class DefaultClientTest {
     @DisplayName("authorize by anonymous (authorizer from config)")
     void testAuthorizeConfigAnonymous() {
         Throwable thrown = catchThrowable(() -> service.defaultAuthorizeConfig().invoke().toCompletableFuture().get());
-        assertThat(thrown).hasCauseExactlyInstanceOf(Forbidden.class);
-        assertThat(thrown.getCause()).hasMessage("Authorization failed");
+        assertThat(thrown).hasCauseExactlyInstanceOf(Unauthorized.class);
+        assertThat(thrown.getCause()).hasMessage("Unauthorized");
     }
 
     @Test

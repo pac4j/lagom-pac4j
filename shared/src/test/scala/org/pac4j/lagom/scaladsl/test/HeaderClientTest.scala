@@ -6,6 +6,7 @@ import com.lightbend.lagom.scaladsl.testkit.ServiceTest
 import com.lightbend.lagom.scaladsl.testkit.ServiceTest.TestServer
 import com.softwaremill.macwire.wire
 import org.pac4j.core.context.HttpConstants.AUTHORIZATION_HEADER
+import org.pac4j.lagom.scaladsl.transport.Unauthorized
 import org.pac4j.lagom.scaladsl.{TestModule, TestService, TestServiceImpl}
 import org.scalatest.{AsyncWordSpec, BeforeAndAfterAll, Matchers}
 import play.api.libs.ws.ahc.AhcWSComponents
@@ -48,8 +49,8 @@ class HeaderClientTest extends AsyncWordSpec with Matchers with BeforeAndAfterAl
       service.headerAuthorize.invoke.map { result =>
         fail("authorize by anonymous should be forbidden")
       } recoverWith {
-        case f: Forbidden =>
-          f.getMessage should ===("Authorization failed")
+        case f: Unauthorized =>
+          f.getMessage should ===("Unauthorized")
       }
     }
 
@@ -63,8 +64,8 @@ class HeaderClientTest extends AsyncWordSpec with Matchers with BeforeAndAfterAl
       service.headerAuthorizeConfig.invoke.map { result =>
         fail("authorize by anonymous should be forbidden")
       } recoverWith {
-        case f: Forbidden =>
-          f.getMessage should ===("Authorization failed")
+        case f: Unauthorized =>
+          f.getMessage should ===("Unauthorized")
       }
     }
 
