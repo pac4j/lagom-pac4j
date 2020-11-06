@@ -1,31 +1,16 @@
 package org.pac4j.lagom.jwt;
 
-import com.nimbusds.jose.EncryptionMethod;
 import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JWEAlgorithm;
-import com.nimbusds.jose.JWSAlgorithm;
-import com.nimbusds.jose.jwk.ECKey;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKMatcher;
 import com.nimbusds.jose.jwk.JWKSelector;
 import com.nimbusds.jose.jwk.KeyUse;
-import com.nimbusds.jose.jwk.OctetSequenceKey;
-import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.jwk.source.RemoteJWKSet;
 import com.nimbusds.jose.util.DefaultResourceRetriever;
 import com.nimbusds.jose.util.ResourceRetriever;
 import com.typesafe.config.Config;
-import com.typesafe.config.ConfigRenderOptions;
-import org.pac4j.jwt.config.encryption.AbstractEncryptionConfiguration;
-import org.pac4j.jwt.config.encryption.ECEncryptionConfiguration;
 import org.pac4j.jwt.config.encryption.EncryptionConfiguration;
-import org.pac4j.jwt.config.encryption.RSAEncryptionConfiguration;
-import org.pac4j.jwt.config.encryption.SecretEncryptionConfiguration;
-import org.pac4j.jwt.config.signature.AbstractSignatureConfiguration;
-import org.pac4j.jwt.config.signature.ECSignatureConfiguration;
-import org.pac4j.jwt.config.signature.RSASignatureConfiguration;
-import org.pac4j.jwt.config.signature.SecretSignatureConfiguration;
 import org.pac4j.jwt.config.signature.SignatureConfiguration;
 import org.pac4j.jwt.credentials.authenticator.JwtAuthenticator;
 
@@ -38,6 +23,8 @@ import java.util.List;
 import static com.nimbusds.jose.jwk.source.RemoteJWKSet.DEFAULT_HTTP_CONNECT_TIMEOUT;
 import static com.nimbusds.jose.jwk.source.RemoteJWKSet.DEFAULT_HTTP_READ_TIMEOUT;
 import static com.nimbusds.jose.jwk.source.RemoteJWKSet.DEFAULT_HTTP_SIZE_LIMIT;
+import static org.pac4j.lagom.jwt.JwkParser.parseEncryption;
+import static org.pac4j.lagom.jwt.JwkParser.parseSignature;
 
 /**
  * Helper for parsing {@link JwtAuthenticator} from Lagom configuration.
@@ -45,54 +32,8 @@ import static com.nimbusds.jose.jwk.source.RemoteJWKSet.DEFAULT_HTTP_SIZE_LIMIT;
  * @author Sergey Morgunov
  * @since 1.0.0
  */
+@SuppressWarnings("PMD.TooManyStaticImports")
 public final class JwtAuthenticatorHelper {
-
-    private static AbstractSignatureConfiguration parseSignature(JWK jwk) throws JOSEException {
-        AbstractSignatureConfiguration signature = null;
-        if (jwk instanceof OctetSequenceKey) {
-            signature = new SecretSignatureConfiguration(((OctetSequenceKey) jwk).toByteArray());
-        } else if (jwk instanceof RSAKey) {
-            signature = new RSASignatureConfiguration(((RSAKey) jwk).toKeyPair());
-        } else if (jwk instanceof ECKey) {
-            signature = new ECSignatureConfiguration(((ECKey) jwk).toKeyPair());
-        }
-        return signature;
-    }
-
-    private static SignatureConfiguration parseSignature(Config conf) throws ParseException, JOSEException {
-        if (!conf.hasPath("jwk")) return null;
-        AbstractSignatureConfiguration signature = parseSignature(
-            JWK.parse(conf.getConfig("jwk").root().render(ConfigRenderOptions.concise()))
-        );
-        if (signature != null && conf.hasPath("algorithm")) {
-            signature.setAlgorithm(JWSAlgorithm.parse(conf.getString("algorithm")));
-        }
-        return signature;
-    }
-
-    private static AbstractEncryptionConfiguration parseEncryption(JWK jwk) throws JOSEException {
-        AbstractEncryptionConfiguration encryption = null;
-        if (jwk instanceof OctetSequenceKey) {
-            encryption = new SecretEncryptionConfiguration(((OctetSequenceKey) jwk).toByteArray());
-        } else if (jwk instanceof RSAKey) {
-            encryption = new RSAEncryptionConfiguration(((RSAKey) jwk).toKeyPair());
-        } else if (jwk instanceof ECKey) {
-            encryption = new ECEncryptionConfiguration(((ECKey) jwk).toKeyPair());
-        }
-        return encryption;
-    }
-
-    private static EncryptionConfiguration parseEncryption(Config conf) throws ParseException, JOSEException {
-        if (!conf.hasPath("jwk")) return null;
-        AbstractEncryptionConfiguration encryption = parseEncryption(
-            JWK.parse(conf.getConfig("jwk").root().render(ConfigRenderOptions.concise()))
-        );
-        if (encryption != null) {
-            if (conf.hasPath("algorithm")) encryption.setAlgorithm(JWEAlgorithm.parse(conf.getString("algorithm")));
-            if (conf.hasPath("method")) encryption.setMethod(EncryptionMethod.parse(conf.getString("method")));
-        }
-        return encryption;
-    }
 
     /**
      * Parse {@link JwtAuthenticator} from Lagom conf.
