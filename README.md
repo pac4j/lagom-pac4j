@@ -46,7 +46,7 @@ Two demo services demonstrate authenticate/authorize by JWT:
 The latest released version is the [![Maven](https://img.shields.io/maven-central/v/org.pac4j/lagom-pac4j-parent.svg)](https://search.maven.org/search?q=a:lagom-pac4j-parent%20AND%20g:org.pac4j)
 The [next version](https://github.com/pac4j/lagom-pac4j/wiki/Next-version) is under development.
 
-See the [release notes](https://github.com/pac4j/lagom-pac4j/releases). Learn more by browsing the [pac4j documentation](http://www.pac4j.org/3.3.x/docs/index.html) and the [lagom-pac4j Javadoc](http://www.javadoc.io/doc/org.pac4j/lagom-pac4j/).
+See the [release notes](https://github.com/pac4j/lagom-pac4j/releases).
 
 ## Need help?
 
