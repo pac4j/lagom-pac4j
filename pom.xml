@@ -45,7 +45,7 @@
     <java.version>1.8</java.version>
     <junit.jupiter.version>5.3.1</junit.jupiter.version>
     <assertj.version>3.11.1</assertj.version>
-    <jackson.version>2.9.4</jackson.version>
+    <jackson.version>2.20</jackson.version>
     <scalatest.version>3.0.8</scalatest.version>
     <macwire.version>2.3.3</macwire.version>
     <nimbus-jose-jwt.version>10.5</nimbus-jose-jwt.version>
