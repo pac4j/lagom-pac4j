@@ -67,7 +67,7 @@
     <dependency>
       <groupId>org.pac4j</groupId>
       <artifactId>pac4j-jwt</artifactId>
-      <version>4.5.2</version>
+      <version>4.5.8</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
