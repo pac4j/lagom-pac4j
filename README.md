@@ -17,7 +17,7 @@ Several versions of the library are available for the different versions of the 
 
 1) A [**client**](http://www.pac4j.org/docs/clients.html) represents an authentication mechanism. It performs the login process and returns a user profile. An indirect client is for web applications authentication while a direct client is for web services authentication:
 
-&#9656; OAuth - SAML - CAS - OpenID Connect - HTTP - OpenID - Google App Engine - Kerberos - LDAP - SQL - JWT - MongoDB - CouchDB - IP address - REST API
+&#9656; OpenID Connect - SAML - CAS - OAuth - HTTP - OpenID - Kerberos - LDAP - SQL - JWT - MongoDB - IP address - REST API
 
 2) An [**authorizer**](http://www.pac4j.org/docs/authorizers.html) is meant to check authorizations on the authenticated user profile(s) or on the current web context:
 
@@ -50,11 +50,4 @@ See the [release notes](https://github.com/pac4j/lagom-pac4j/releases).
 
 ## Need help?
 
-If you need commercial support (premium support or new/specific features), contact us at [info@pac4j.org](mailto:info@pac4j.org).
-
-If you have any questions, want to contribute or be notified about the new releases and security fixes, please subscribe to the following [mailing lists](http://www.pac4j.org/mailing-lists.html):
-
-- [pac4j-users](https://groups.google.com/forum/?hl=en#!forum/pac4j-users)
-- [pac4j-developers](https://groups.google.com/forum/?hl=en#!forum/pac4j-dev)
-- [pac4j-announce](https://groups.google.com/forum/?hl=en#!forum/pac4j-announce)
-- [pac4j-security](https://groups.google.com/forum/#!forum/pac4j-security)
+You can use the [mailing lists](https://www.pac4j.org/mailing-lists.html) or the [commercial support](https://www.pac4j.org/commercial-support.html).
