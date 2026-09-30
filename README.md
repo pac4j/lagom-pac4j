@@ -2,6 +2,16 @@
   <img src="https://www.pac4j.org/img/logo-lagom.png" width="300" />
 </p>
 
+<p align="center">
+  <a href="https://central.sonatype.com/artifact/org.pac4j/lagom-pac4j_2.13"><img src="https://img.shields.io/maven-central/v/org.pac4j/lagom-pac4j_2.13?label=Maven%20Central" alt="Maven Central" /></a>
+  <img src="https://img.shields.io/badge/Java-8%2B-blue" alt="Java 8+" />
+  <img src="https://img.shields.io/badge/Lagom-1.5%20%7C%201.6-blue" alt="Lagom 1.5 | 1.6" />
+  <a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache%202.0-blue" alt="Apache 2 license" /></a>
+</p>
+
+> `lagom-pac4j` is the Lagom implementation of **[pac4j](https://github.com/pac4j/pac4j)**, the security engine for Java.
+> If it is useful to you, please ⭐ **[star pac4j on GitHub](https://github.com/pac4j/pac4j)**: it helps other developers discover it!
+
 The `lagom-pac4j` project is an **easy and powerful security library for Lagom framework** which supports authentication and authorization.
 It's based on Lagom 1.5/1.6 (and Scala 2.11/2.12/2.13) and the **[pac4j security engine](https://github.com/pac4j/pac4j) v3**. 
 It's available under the Apache 2 license.
