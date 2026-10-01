@@ -7,7 +7,13 @@
   <img src="https://img.shields.io/badge/Java-8%2B-blue" alt="Java 8+" />
   <img src="https://img.shields.io/badge/Lagom-1.5%20%7C%201.6-blue" alt="Lagom 1.5 | 1.6" />
   <a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/license-Apache%202.0-blue" alt="Apache 2 license" /></a>
+  <img src="https://img.shields.io/badge/status-deprecated-red" alt="Deprecated" />
 </p>
+
+> [!WARNING]
+> **This project is deprecated and no longer maintained.**
+> The Lagom framework reached its end-of-life on July 1st, 2024 and no longer receives any updates, including security patches.
+> As a consequence, `lagom-pac4j` will not receive any new release. Lightbend recommends migrating to [Akka](https://akka.io).
 
 > `lagom-pac4j` is the Lagom implementation of **[pac4j](https://github.com/pac4j/pac4j)**, the security engine for Java.
 > If it is useful to you, please ⭐ **[star pac4j on GitHub](https://github.com/pac4j/pac4j)**: it helps other developers discover it!
@@ -53,8 +59,8 @@ Two demo services demonstrate authenticate/authorize by JWT:
 
 ## Versions
 
-The latest released version is the [![Maven](https://img.shields.io/maven-central/v/org.pac4j/lagom-pac4j-parent.svg)](https://search.maven.org/search?q=a:lagom-pac4j-parent%20AND%20g:org.pac4j)
-The [next version](https://github.com/pac4j/lagom-pac4j/wiki/Next-version) is under development.
+The latest (and last) released version is the [![Maven](https://img.shields.io/maven-central/v/org.pac4j/lagom-pac4j-parent.svg)](https://search.maven.org/search?q=a:lagom-pac4j-parent%20AND%20g:org.pac4j)
+No further version will be released.
 
 See the [release notes](https://github.com/pac4j/lagom-pac4j/releases).
 
